@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Email Sender Test</title>
+</head>
+<body>
+    <form id="emailForm">
+        <input type="file" name="csvFile" accept=".csv" required>
+        <input type="text" name="subject" placeholder="Email Subject" required>
+        <textarea name="body" placeholder="Email Body" required></textarea>
+        <button type="submit">Send Emails</button>
+    </form>
+
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            try {
+                const response = await fetch('http://localhost:3001/send-emails', {
+                    method: 'POST',
+                    body: formData
+                });
+                const result = await response.json();
+                alert(result.message || result.error);
+            } catch (error) {
+                console.error('Error:', error);
+                alert('An error occurred');
+            }
+        });
+    </script>
+</body>
+</html>
