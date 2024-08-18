@@ -1,3 +1,6 @@
+import dotenv from 'dotenv';
+dotenv.config();
+
 import express from 'express';
 import cors from 'cors';
 import multer from 'multer';
@@ -5,10 +8,12 @@ import { parseCSV } from './csvParser';
 import { sendEmail } from './emailSender';
 
 const app = express();
-const port = 3001;
+const port = process.env.PORT || 3001;
 const upload = multer({ dest: 'uploads/' });
 
-app.use(cors());
+app.use(cors({
+  origin: process.env.FRONTEND_URL || 'http://localhost:3000'
+}));
 app.use(express.json());
 
 function replacePlaceholders(text: string, record: any): string {
