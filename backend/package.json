@@ -4,10 +4,10 @@
   "description": "",
   "main": "src/server.ts",
   "scripts": {
-       "start": "ts-node src/server.ts",
-       "build": "tsc",
-       "postinstall": "npm run build"
-    },
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "postinstall": "npm run build"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
